@@ -7,7 +7,6 @@ from django.conf import settings
 from django.db.backends.postgresql.base import (
     psycopg2,
     Database,
-    DatabaseWrapper as Psycopg2DatabaseWrapper,
 )
 from django.db.backends.postgresql.creation import DatabaseCreation as Psycopg2DatabaseCreation
 from django.dispatch import Signal
@@ -84,11 +83,11 @@ class DatabaseCreation(Psycopg2DatabaseCreation):
         super(DatabaseCreation, self).destroy_test_db(*args, **kw)
 
 
-class DatabaseWrapper(Psycopg2DatabaseWrapper):
+class DatabaseWrapperMixin:
     """SQLAlchemy FTW."""
 
     def __init__(self, *args, **kwargs):
-        super(DatabaseWrapper, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self._pool = None
         self._pool_connection = None
         self.creation = DatabaseCreation(self)

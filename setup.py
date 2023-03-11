@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 from django_postgrespool2 import __version__, __author__
 
 required = [
-    "sqlalchemy>=1.1",
+    "sqlalchemy>=1.1,<2",
     "django>=2.2",
 ]
 
